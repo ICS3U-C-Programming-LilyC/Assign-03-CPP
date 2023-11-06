@@ -6,16 +6,20 @@
 // a burger with 2 sizes, fries, and a drink.
 // The program will print the subtotal, tax,
 // and total cost of the purchase.
-#include <cmath>
-#include <iomanip>
+
 #include <cstdlib>
+#include <iomanip>
+#include <string>
 #include <iostream>
 
-    int main() {
+int main() {
     // Declaring constant for tax.
     const float TAX = 0.13;
 
     // Declaring variables.
+    // Allowing for the different prices of
+    // a burger to be under 1 variable.
+    // Source: https://cplusplus.com/forum/general/75370/
     float burgerPrices[] = {5.00, 7.00};
     int friesPrice = 3.00;
     int drinkPrice = 1.00;
@@ -43,11 +47,18 @@
     std::cout << "2 - Large\n";
     std::cout <<
     "Enter the number representing the option you would like to select.\n";
+    std::cout << "If you do not want to order a burger then press enter";
+    std::cout << "to proceed to the other menu options.\n";
 
     // Getting user input for the size
-    // of burger they want.
-    std::cout << "Enter your size of burger: ";
-    std::cin >> burgerSize;
+    // of the burger they want.
+    std::cout
+        << "Enter your size of burger: ";
+    // Allowing for the user to skip the question
+    // if they do not want a burger.
+    // Source:
+    // https://stackoverflow.com/questions/6819082/why-does-a-stdgetline-call-on-stdcin-not-wait-for-user-input
+    std::getline(std::cin, burgerSize);
 
     // Initiating try catch.
     try {
@@ -63,9 +74,9 @@
             burgerPrices[2] = 7.00;
         }
 
-    // Catching any errors.
+        // Catching any errors.
     } catch (std::invalid_argument) {
-        std::cout << "Invalid choice for burger size.";
+        std::cout << "Invalid choice for burger size.\n";
     }
 
     // Asking the user if they want fries.
@@ -74,10 +85,16 @@
     std::cout << "2 - No\n";
     std::cout <<
     "Enter the number representing the option you would like to select.\n";
+    std::cout << "If you do not want to order a burger then press enter";
+    std::cout << "to proceed to the other menu options.\n";
 
     // Getting user input for fries.
     std::cout << "Enter your choice for fries: ";
-    std::cin >> friesChoice;
+    // Allowing for the user to skip the question
+    // if they do not want fries.
+    // Source:
+    // https://stackoverflow.com/questions/6819082/why-does-a-stdgetline-call-on-stdcin-not-wait-for-user-input
+    std::getline(std::cin, friesChoice);
 
     // Initiating try catch.
     try {
@@ -91,9 +108,9 @@
         } else {
             friesPrice = 0.00;
         }
-    // Catching any errors.
+        // Catching any errors.
     } catch (std::invalid_argument) {
-        std::cout << "Invalid choice for fries.";
+        std::cout << "Invalid choice for fries.\n";
     }
 
     // Asking the user if they want a drink.
@@ -102,10 +119,18 @@
     std::cout << "2 - No\n";
     std::cout <<
     "Enter the number representing the option you would like to select.\n";
+    std::cout <<
+    "If you do not want to order a burger then press enter";
+    std::cout << "to proceed to the other menu options.\n";
 
-    // Getting user input for drink.
-    std::cout << "Enter your choice for a drink: ";
-    std::cin >> drinkChoice;
+    // Getting user input for drinks.
+    std::cout
+        << "Enter your choice for a drink: ";
+    // Allowing for the user to skip the question
+    // if they do not want a drink.
+    // Source:
+    // https://stackoverflow.com/questions/6819082/why-does-a-stdgetline-call-on-stdcin-not-wait-for-user-input
+    std::getline(std::cin, drinkChoice);
 
     // Initiating try catch.
     try {
@@ -118,6 +143,7 @@
         } else {
             drinkPrice = 0.00;
         }
+        // Catching errors.
     } catch (std::invalid_argument) {
         std::cout << "Invalid choice for a drink.\n";
     }
@@ -128,11 +154,11 @@
     // If the user wants a small burger,
     // with fries and a drink.
     if (burgerSizeAsInteger == 1 && friesAsInteger == 1 &&
-    drinkAsInteger == 1) {
+        drinkAsInteger == 1) {
         subtotal = burgerPrices[1] + friesPrice + drinkPrice;
         // Else if the user wants a large burger, with fries and a drink.
-    } else if (burgerSizeAsInteger == 2 && friesAsInteger
-    == 1 && drinkAsInteger == 1) {
+    } else if (burgerSizeAsInteger == 2 &&
+    friesAsInteger == 1 && drinkAsInteger == 1) {
         subtotal = burgerPrices[2] + friesPrice + drinkPrice;
         // Else if the user wants fries and a drink.
     } else if (friesAsInteger == 1 && drinkAsInteger == 1) {
